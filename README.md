@@ -1,31 +1,80 @@
-# Note Taking App made in Flutter with Sqlite database 
- This is a note taking app made with flutter.<br>
-## Concepts used:
-<ul>
-<li>Sqlite database to store custom Note object.</li>
-<li>Search Functionality</li>
-<li>Staggered GridView</li>
-</ul>
+# Note Taking App - Flutter & SQLite
 
-Video Demo: https://www.youtube.com/watch?v=Fg68VND8unE <br><br>
+Ứng dụng ghi chú đa chức năng xây dựng bằng Flutter và SQLite, với khả năng đính kèm hình ảnh và tệp tin.
 
-If you want to use firebase to store the notes online, check out this [repo](https://github.com/prabhashrai02/notes-app) .
+## Tính năng chính
 
-Screenshots:<br>
-<table style={border:"none"}><tr>
-<td><img src="https://user-images.githubusercontent.com/29589003/57538958-2ae63100-7369-11e9-9efc-102497249cdd.png" alt="Screenshot 2"/></td>
-<td><img src="https://user-images.githubusercontent.com/29589003/57538952-29b50400-7369-11e9-9b42-6a5770cb18e6.png" alt="Screenshot 1"/></td>
-<td><img src="https://user-images.githubusercontent.com/29589003/57538950-29b50400-7369-11e9-990f-1d2fb7a9d1a0.png" alt="Screenshot 3"/></td>
+-   Tạo, chỉnh sửa, xóa ghi chú với tiêu đề và nội dung
+-   Chọn độ ưu tiên cho ghi chú (Cao, Vừa, Thấp)
+-   Tùy chỉnh màu sắc ghi chú (10 màu khác nhau)
+-   Chế độ xem lưới hoặc danh sách
+-   Tìm kiếm ghi chú theo tiêu đề và nội dung
+-   Đính kèm hình ảnh từ thư viện hoặc camera
+-   Đính kèm tệp tin (PDF, văn bản, v.v.)
+-   Xem trước hình ảnh đính kèm
+-   Chế độ sáng/tối tự động hoặc tùy chỉnh
+-   Lưu trữ cục bộ bằng SQLite
 
-</tr>
-<tr>
-<td><img src="https://user-images.githubusercontent.com/29589003/57538957-2ae63100-7369-11e9-8506-1cd7decf1815.png" alt="Screenshot 1"/></td>
+## Cấu trúc cơ sở dữ liệu
 
-<td><img src="https://user-images.githubusercontent.com/29589003/57538953-2a4d9a80-7369-11e9-9249-6020ae6eb949.png" alt="Screenshot 2"/></td>
-<td><img src="https://user-images.githubusercontent.com/29589003/57538954-2a4d9a80-7369-11e9-8b25-3f2027a422b8.png" alt="Screenshot 3"/></td>
+Ứng dụng sử dụng SQLite với hai bảng chính:
 
+```
++-------------------+        +----------------------+
+|    note_table     |        |   attachment_table   |
++-------------------+        +----------------------+
+| id (PK)           |        | attachment_id (PK)   |
+| title             |        | note_id (FK)         |
+| description       |◄-------| file_path            |
+| priority          |        | file_name            |
+| color             |        | file_type            |
+| date              |        | file_size            |
++-------------------+        | created_at           |
+                             +----------------------+
+```
 
+## Công nghệ sử dụng
 
-</tr>
+-   Flutter & Dart
+-   SQLite (sqflite package)
+-   Provider cho State Management
+-   file_picker và image_picker cho tính năng đính kèm
+-   Shared Preferences để lưu thiết lập người dùng
+-   Dynamic Theming (chế độ sáng/tối)
+-   Material Design 3
 
-</table>
+## Yêu cầu hệ thống
+
+-   Flutter 3.0 trở lên
+-   iOS 11.0+ / Android 5.0+ / Windows / macOS / Linux
+
+### Cho Linux
+
+-   Cần cài đặt `zenity` cho tính năng chọn file
+-   Cần cài đặt `xdg-desktop-portal` và portal GUI tương ứng (`xdg-desktop-portal-gtk/kde/...`) cho tính năng chọn ảnh
+
+## Cài đặt
+
+1. Clone repository:
+
+```
+git clone https://github.com/yourusername/notes-app.git
+```
+
+2. Di chuyển vào thư mục project:
+
+```
+cd notes-app
+```
+
+3. Cài đặt các dependencies:
+
+```
+flutter pub get
+```
+
+4. Chạy ứng dụng:
+
+```
+flutter run
+```
